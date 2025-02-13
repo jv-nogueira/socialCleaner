@@ -19,32 +19,23 @@ document.addEventListener("keydown", function(event) {
         standardMessage)
         if(!isNaN(questionTemp) && questionTemp > 10){
             var answerTemp = questionTemp/2 // Pega a resposta do prompt e divide por 2 para dividir igualmente os segundos entre os intervalos
-            /*
-            var questionUsernames = prompt("Digite no campo abaixo quais perfis quer que o bot ignore, ou seja, quer que permaneça seguindo.\n\n"+
-            "Exemplo: 'username1', 'username2', 'username3'\n\n"+
-            "Preste atenção aos detalhes da vírgula e das aspas, caso contrário, o bot não vai funcionar corretamente."+
-            standardMessage)
-            */
             var i=0
             var contadorUnfollow=0
             var arrayArmazenarNameAndUsername = [];
             percorrer()
             function percorrer(){
-                var profileReference = document.querySelectorAll('._aano')[0].children[0].children[0].children[i] // Referenciar cada perfil da lista
+                var profileReference = [...document.querySelectorAll("span")].find(il => il.textContent.includes("Pesquisar")).parentElement.parentElement.parentElement.parentElement.parentElement.children[2].children[0].children[0].children[i] // Referenciar cada perfil da lista
                 if(i>0){
-                    var viewProfile = document.querySelectorAll('._aano')[0].children[0].children[0].children[i-1].scrollIntoView() // Rola a página para que o elemento fique vísivel 
+                    var viewProfile = [...document.querySelectorAll("span")].find(il => il.textContent.includes("Pesquisar")).parentElement.parentElement.parentElement.parentElement.parentElement.children[2].children[0].children[0].children[i-1].scrollIntoView() // Rola a página para que o elemento fique vísivel 
                 };
-                var lastIndex = document.querySelectorAll('._aano')[0].children[0].children[0].children.length -1 // Referencia o last index da lista de perfis
-                var lastElementIndex = document.querySelectorAll('._aano')[0].children[0].children[0].children[lastIndex] // Visualiza o last element do index da lista de perfis
+                var lastIndex = [...document.querySelectorAll("span")].find(il => il.textContent.includes("Pesquisar")).parentElement.parentElement.parentElement.parentElement.parentElement.children[2].children[0].children[0].children.length -1 // Referencia o last index da lista de perfis
+                var lastElementIndex = [...document.querySelectorAll("span")].find(il => il.textContent.includes("Pesquisar")).parentElement.parentElement.parentElement.parentElement.parentElement.children[2].children[0].children[0].children[lastIndex] // Visualiza o last element do index da lista de perfis
                 var getUsernameOrName = profileReference.children[0].children[0].children[0].children[1].children[0].children[0]
                 var getName = getUsernameOrName.children[1].children[0].innerText // Pegar o nome da lista
-                var getUsername = getUsernameOrName.children[0].children[0].children[0].children[0].children[0].children[0].children[0].innerHTML // Pegar o username da lista
+                var getUsername = getUsernameOrName.children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].innerHTML // Pegar o username da lista
                 var getUsernameAndName = {getName, getUsername}
                 var limiteContador = question;
                 var buttonUnfollow = profileReference.children[0].children[0].children[0].children[2].children[0].children[0] // Botão para deixar de seguir 
-               // if(questionUsernames != null){
-                    // var usernamesPrompt = questionUsernames.slice(1, -1).split("', '")
-                    // var usernamesPermitidos = [usernamesPrompt][0]
                     if(!permitidosUsername.includes(getUsername)){
                             viewProfile 
                         if(contadorUnfollow < limiteContador){ // Limite de usernames que o bot vai deixar de seguir
@@ -113,7 +104,6 @@ document.addEventListener("keydown", function(event) {
                             },getRandomSeconds(1))
                         },getRandomSeconds(1))
                     }
-                // }
             }
         }else if(questionTemp <= 10){
             alert('Digite um número acima de 10!'+
