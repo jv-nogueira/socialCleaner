@@ -73,7 +73,9 @@ function percorrer(){
         .then(permitidosUsername => {
             if(!permitidosUsername.includes(getUsername)){
                 // Rola a página para que o elemento fique vísivel 
-                if(profileReference > 0){profileReference[i-1].scrollIntoView()}
+                if(i > 0){
+                    profileReference[i-1].scrollIntoView()
+                }
                 // Limite de usernames que o bot vai deixar de seguir
                 if(contadorUnfollow < limiteContador){ 
                         arrayArmazenarNameAndUsername.push(getUsernameAndName)
