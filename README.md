@@ -4,7 +4,7 @@ Deixar de seguir ou remover seguidores na plataforma do instagram. Não há nece
 
 ## Funcionamento
 
-### Instalação da extensão
+### Instalação
 1. Copiar a pasta do repositório remoto para o repositório local 
 (git clone https://github.com/jv-nogueira/instagramUnfollowBot.git)
 2. Acessar o navegador e clicar em 'Gerenciar extensões' para habilitar o 'Modo do desenvolvedor'

@@ -58,8 +58,12 @@ function iniciarBot(){
 function percorrer(){
     try{
         if (!running) return;
+
         // Referenciar cada perfil da lista
-        var profileReference = [...document.querySelectorAll("span")].find(il => il.textContent.includes("Pesquisar")).parentElement.parentElement.parentElement.parentElement.parentElement.children[2].children[0].children[0].children
+        var profileReference = [...document.querySelectorAll("span")].find(il => il.textContent.includes("Pesquisar"))
+        .parentElement.parentElement.parentElement.parentElement.parentElement
+        .children[2].children[0].children[0].children
+
         var getUsernameOrName = profileReference[i].children[0].children[0].children[0].children[1].children[0].children[0]
         // Pegar o nome da lista
         var getName = getUsernameOrName.children[1].children[0].innerText 
@@ -68,14 +72,11 @@ function percorrer(){
         var getUsernameAndName = {getName, getUsername}
         // Botão para deixar de seguir
         var buttonUnfollow = profileReference[i].children[0].children[0].children[0].children[2].children[0].children[0]  
+
         fetch(chrome.runtime.getURL('usernames.txt'))
         .then(response => response.text())
         .then(permitidosUsername => {
             if(!permitidosUsername.includes(getUsername)){
-                // Rola a página para que o elemento fique vísivel 
-                if(i > 0){
-                    profileReference[i-1].scrollIntoView()
-                }
                 // Limite de usernames que o bot vai deixar de seguir
                 if(contadorUnfollow < limiteContador){ 
                         arrayArmazenarNameAndUsername.push(getUsernameAndName)
@@ -85,7 +86,7 @@ function percorrer(){
                                 [...document.querySelectorAll('button')].find(el => el.textContent == 'Remover'||el.textContent == 'Deixar de seguir').click()
                                 contadorUnfollow++
                                 i++
-                                setTimeout(percorrer(),getRandomSeconds(1))
+                                setTimeout(() => delay(profileReference, i),getRandomSeconds(1))
                             },getRandomSeconds(answerTemp))
                         },getRandomSeconds(answerTemp))
                 }else{
@@ -94,13 +95,27 @@ function percorrer(){
                 };
             }else{
                 i++
-                percorrer()
+                delay(profileReference, i)
             }
+        
         });
     }catch{            
         // Gera o arquivo em qualquer erro
         setTimeout(gerarArquivo,getRandomSeconds(1))
         running = false;
+    }
+}
+
+// Garante a barra de rolagem
+function delay(profileReference, i) {
+    if (i >= profileReference.length - 4) {
+        profileReference[i].scrollIntoView()
+        setTimeout(percorrer, getRandomSeconds(2));
+    }else if(i > 0){
+        profileReference[i-1].scrollIntoView()
+        setTimeout(percorrer, 100);
+    }else{
+        setTimeout(percorrer, 100);
     }
 }
 
