@@ -68,7 +68,7 @@ function percorrer(){
         // Pegar o nome da lista
         var getName = getUsernameOrName.children[1].children[0].innerText 
         // Pegar o username da lista
-        var getUsername = getUsernameOrName.children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].innerHTML 
+        var getUsername = getUsernameOrName.children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].innerHTML
         var getUsernameAndName = {getName, getUsername}
         // Botão para deixar de seguir
         var buttonUnfollow = profileReference[i].children[0].children[0].children[0].children[2].children[0].children[0]  
@@ -76,9 +76,9 @@ function percorrer(){
         fetch(chrome.runtime.getURL('usernames.txt'))
         .then(response => response.text())
         .then(text => {
-            const permitidosUsername = text.split(/\r?\n/).map(line => line.trim()); // Divide por linha e remove espaços extras
-            console.log(permitidosUsername); // Agora é um array de usernames
-            if(!permitidosUsername.includes(getUsername)){
+            // Converte para array e depois para Set
+            const permitidosUsername = new Set(text.split(/\r?\n/).map(line => line.trim())); 
+            if(!permitidosUsername.has(getUsername)){
                 // Limite de usernames que o bot vai deixar de seguir
                 if(contadorUnfollow < limiteContador){ 
                         arrayArmazenarNameAndUsername.push(getUsernameAndName)
