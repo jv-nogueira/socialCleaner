@@ -75,7 +75,9 @@ function percorrer(){
 
         fetch(chrome.runtime.getURL('usernames.txt'))
         .then(response => response.text())
-        .then(permitidosUsername => {
+        .then(text => {
+            const permitidosUsername = text.split(/\r?\n/).map(line => line.trim()); // Divide por linha e remove espaços extras
+            console.log(permitidosUsername); // Agora é um array de usernames
             if(!permitidosUsername.includes(getUsername)){
                 // Limite de usernames que o bot vai deixar de seguir
                 if(contadorUnfollow < limiteContador){ 
