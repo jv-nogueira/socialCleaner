@@ -30,11 +30,16 @@ function iniciarBot(){
             // Maior delay
             setTimeout(iniciarBot,2000)
         }
-
-    }catch{
-        // Gera arquivo em qualquer erro
-        gerarArquivo()
+    }catch {
+        playSound();          
+        gerarArquivo();
     }
+    
+}
+
+function playSound(){
+    const audio = new Audio(chrome.runtime.getURL("notification.mp3"));
+    audio.play().catch(err => console.error("Erro ao tocar o som:", err));
 }
 
 function gerarArquivo(){
