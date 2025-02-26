@@ -108,6 +108,11 @@ function percorrer(){
     }
 }
 
+function playSound(){
+    const audio = new Audio(chrome.runtime.getURL("notification.mp3"));
+    audio.play().catch(err => console.error("Erro ao tocar o som:", err));
+}
+
 // Garante a barra de rolagem
 function delay(profileReference, i) {
     if (i >= profileReference.length - 4) {
@@ -139,6 +144,8 @@ function gerarArquivo(){
     link.click();
     // Remover o link da página
     document.body.removeChild(link);
+    // Toca som de notificação
+    playSound()
 }
 
 function getRandomSeconds(sum){
