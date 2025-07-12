@@ -1,16 +1,15 @@
+
 {
-    "manifest_version": 2,
-    "name": "instagramUsername",
-    "description": "",
-    "version": "0.1",
-    "permissions": ["activeTab"],
-    "web_accessible_resources": ["notification.mp3"],                   
-    "content_scripts": [
-        {
-            "matches": ["<all_urls>"],
-            "js": [
-                "content.js"
-            ]
-        }
-    ]
+
+  "name": "Copiar lista de seguidores ou seguindo do Instagram",
+  "description": "",
+  "manifest_version": 3,
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html"
+  },
+    "icons": { 
+        "48": "icons/lista.png"
+},
+  "permissions": ["activeTab", "scripting"]
 }
