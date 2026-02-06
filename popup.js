@@ -15,9 +15,9 @@ function extrairDados() {
     let i = 0;
 
     const gerarArquivo = () => {
-        let csvContent = "\uFEFFNome\tUsername\n";
+        let csvContent = "\uFEFFImagem\tNome\tUsername\n";
         arrayArmazenarNameAndUsername.forEach(item => {
-            csvContent += item.getName + "\t" + item.getUsername + "\n";
+            csvContent += item.getImage + "\t" + item.getName + "\t" + item.getUsername + "\n";
         });
         const blob = new Blob([csvContent], { type: "text/txt" });
         const link = document.createElement("a");
@@ -36,10 +36,11 @@ function extrairDados() {
                 .children[2].children[0].children[0].children;
 
             const getUsernameOrName = profileReference[i].children[0].children[0].children[0].children[1].children[0].children[0];
+            const getImage = profileReference[i].querySelector("img").src;
             const getName = getUsernameOrName.children[1].children[0].innerText;
             const getUsername = getUsernameOrName.children[0].children[0].children[0].children[0].children[0].children[0].children[0].children[0].innerHTML;
 
-            arrayArmazenarNameAndUsername.push({ getName, getUsername });
+            arrayArmazenarNameAndUsername.push({ getImage, getName, getUsername });
 
             if (i < profileReference.length - 4) {
                 i++;
